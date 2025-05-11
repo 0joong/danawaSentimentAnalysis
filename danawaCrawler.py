@@ -9,15 +9,17 @@ from selenium.webdriver.support import expected_conditions as EC
 from selenium.common.exceptions import TimeoutException, NoSuchElementException
 
 class DanawaCrawler:
-    def __init__(self, headless: bool = True, logger=None):
-        self.options = Options()
+    def __init__(self, headless=True, logger=None):
+        chromedriver_autoinstaller.install()  # ✅ 자동설치
+
+        options = Options()
         if headless:
-            self.options.add_argument("--headless")
-            self.options.add_argument("--disable-gpu")
-        self.options.add_argument("--no-sandbox")
-        self.options.add_argument("--disable-dev-shm-usage")
-        self.options.add_argument("user-agent=Mozilla/5.0")
-        self.options.add_argument("--remote-debugging-port=9222")
+            options.add_argument("--headless")
+        options.add_argument("--no-sandbox")
+        options.add_argument("--disable-dev-shm-usage")
+        options.add_argument("--disable-gpu")
+        options.add_argument("--remote-debugging-port=9222")
+        options.add_argument("user-agent=Mozilla/5.0")
 
         self.driver = webdriver.Chrome(options=self.options)
         self.wait = WebDriverWait(self.driver, 10)
