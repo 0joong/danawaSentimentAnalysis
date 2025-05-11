@@ -17,6 +17,7 @@ class DanawaCrawler:
         self.options.add_argument("--no-sandbox")
         self.options.add_argument("--disable-dev-shm-usage")
         self.options.add_argument("user-agent=Mozilla/5.0")
+        self.options.add_argument("--remote-debugging-port=9222")
 
         self.driver = webdriver.Chrome(options=self.options)
         self.wait = WebDriverWait(self.driver, 10)
